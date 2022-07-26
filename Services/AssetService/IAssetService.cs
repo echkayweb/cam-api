@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using cam_api.Dtos.Asset;
 
 namespace cam_api.Services.AssetService

@@ -15,6 +15,7 @@ namespace cam_api.Migrations
                 {
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeName = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     HouseNumber = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(20)", nullable: false),

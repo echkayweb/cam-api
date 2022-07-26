@@ -107,6 +107,7 @@ namespace cam_api.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("DOJ")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EOJ")
@@ -115,6 +116,10 @@ namespace cam_api.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("EmployeeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()

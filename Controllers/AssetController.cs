@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using cam_api.Dtos.Asset;
 using cam_api.Services.AssetService;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +30,12 @@ namespace cam_api.Controllers
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<GetAssetDto>>>> AddAsset(AddAssetDto newAsset)
         {
-            return Ok(await _assetService.AddAsset(newAsset));
+            var response = await _assetService.AddAsset(newAsset);
+            if (response.Data == null)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
         }
 
         [HttpPut]
@@ -52,7 +53,8 @@ namespace cam_api.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetAssetDto>>>> Delete(int id)
         {
             var response = await _assetService.DeleteAsset(id);
-            if (response.Data == null) {
+            if (response.Data == null)
+            {
                 return NotFound(response);
             }
             return Ok(response);
