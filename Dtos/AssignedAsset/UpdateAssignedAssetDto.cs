@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace cam_api.Dtos.AssignAsset
+namespace cam_api.Dtos.AssignedAsset
 {
-    public class GetAssignAssetDto
+    public class UpdateAssignedAssetDto
     {
         public int AssignedAssetId { get; set; }
         public Asset? Asset { get; set; }
