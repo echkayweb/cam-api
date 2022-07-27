@@ -1,4 +1,4 @@
-namespace cam_api.Dtos.Asset
+namespace cam_api.Dtos.AssetDto
 {
     public class AddAssetDto
     {

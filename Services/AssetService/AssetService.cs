@@ -1,6 +1,6 @@
 using AutoMapper;
 using cam_api.Data;
-using cam_api.Dtos.Asset;
+using cam_api.Dtos.AssetDto;
 using Microsoft.EntityFrameworkCore;
 
 namespace cam_api.Services.AssetService

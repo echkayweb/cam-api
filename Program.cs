@@ -1,6 +1,7 @@
 global using cam_api.Models;
 using cam_api.Data;
 using cam_api.Services.AssetService;
+using cam_api.Services.AssignAssetService;
 using cam_api.Services.EmployeeService;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IAssignAssetService, AssignAssetService>();
 
 var app = builder.Build();
 

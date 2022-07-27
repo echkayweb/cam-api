@@ -1,4 +1,4 @@
-using cam_api.Dtos.Asset;
+using cam_api.Dtos.AssetDto;
 
 namespace cam_api.Services.AssetService
 {

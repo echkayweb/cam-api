@@ -1,4 +1,4 @@
-using cam_api.Dtos.Asset;
+using cam_api.Dtos.AssetDto;
 using cam_api.Services.AssetService;
 using Microsoft.AspNetCore.Mvc;
 
