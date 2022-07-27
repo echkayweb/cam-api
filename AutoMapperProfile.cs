@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using cam_api.Dtos.AssetDto;
+using cam_api.Dtos.AssignedAsset;
 using cam_api.Dtos.EmployeeDto;
 
 namespace cam_api
@@ -18,6 +19,9 @@ namespace cam_api
             CreateMap<Employee, GetEmployeeDto>();
             CreateMap<AddEmployeeDto, Employee>();
             CreateMap<UpdateEmployeeDto, Employee>();
+            CreateMap<AssignedAsset, GetAssignedAssetDto>();
+            CreateMap<AddAssignedAssetDto, AssignedAsset>();
+            CreateMap<UpdateAssignedAssetDto, AssignedAsset>();
         }
     }
 }

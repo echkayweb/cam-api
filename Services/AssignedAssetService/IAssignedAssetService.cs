@@ -8,10 +8,10 @@ namespace cam_api.Services.AssignedAssetService
 {
     public interface IAssignedAssetService
     {
-        Task<ServiceResponse<List<GetAssignedAssetDto>>> GetAllAssignAssets();
-        Task<ServiceResponse<GetAssignedAssetDto>> GetAssignAssetById(int id);
-        Task<ServiceResponse<List<GetAssignedAssetDto>>> AddAssignAsset(AddAssignedAssetDto newAssignAsset);
-        Task<ServiceResponse<GetAssignedAssetDto>> UpdateAssignAsset(UpdateAssignedAssetDto updatedAssignAsset);
-        Task<ServiceResponse<List<GetAssignedAssetDto>>> DeleteAssignAsset(int id);
+        Task<ServiceResponse<List<GetAssignedAssetDto>>> GetAllAssignedAssets();
+        Task<ServiceResponse<GetAssignedAssetDto>> GetAssignedAssetById(int id);
+        Task<ServiceResponse<List<GetAssignedAssetDto>>> AddAssignedAsset(AddAssignedAssetDto newAssignAsset);
+        Task<ServiceResponse<GetAssignedAssetDto>> UpdateAssignedAsset(UpdateAssignedAssetDto updatedAssignAsset);
+        Task<ServiceResponse<List<GetAssignedAssetDto>>> DeleteAssignedAsset(int id);
     }
 }
