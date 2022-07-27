@@ -22,7 +22,7 @@ namespace cam_api.Migrations
                     State = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     Pincode = table.Column<int>(type: "int", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    DOJ = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DOJ = table.Column<DateTime>(type: "Date", nullable: false),
                     EOJ = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Phone = table.Column<long>(type: "bigint", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(30)", nullable: false)
@@ -42,15 +42,14 @@ namespace cam_api.Migrations
                     AssetModel = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     AssetSerialNumber = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     AssetAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    AssetAssignedTo = table.Column<int>(type: "int", nullable: true),
-                    EmployeeId = table.Column<int>(type: "int", nullable: true)
+                    AssetAssignedTo = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assets", x => x.AssetId);
                     table.ForeignKey(
-                        name: "FK_Assets_Employees_EmployeeId",
-                        column: x => x.EmployeeId,
+                        name: "FK_Assets_Employees_AssetAssignedTo",
+                        column: x => x.AssetAssignedTo,
                         principalTable: "Employees",
                         principalColumn: "EmployeeId");
                 });
@@ -61,11 +60,11 @@ namespace cam_api.Migrations
                 {
                     AssignedAssetId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AssetId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    AssetId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
                     Remarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateAssigned = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateReturned = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DateAssigned = table.Column<DateTime>(type: "Date", nullable: false),
+                    DateReturned = table.Column<DateTime>(type: "Date", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,20 +73,18 @@ namespace cam_api.Migrations
                         name: "FK_AssignedAssets_Assets_AssetId",
                         column: x => x.AssetId,
                         principalTable: "Assets",
-                        principalColumn: "AssetId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AssetId");
                     table.ForeignKey(
                         name: "FK_AssignedAssets_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "EmployeeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "EmployeeId");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assets_EmployeeId",
+                name: "IX_Assets_AssetAssignedTo",
                 table: "Assets",
-                column: "EmployeeId");
+                column: "AssetAssignedTo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AssignedAssets_AssetId",

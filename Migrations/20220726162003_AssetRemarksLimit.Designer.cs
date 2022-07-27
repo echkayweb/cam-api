@@ -12,8 +12,8 @@ using cam_api.Data;
 namespace cam_api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220726052157_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220726162003_AssetRemarksLimit")]
+    partial class AssetRemarksLimit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,12 +50,9 @@ namespace cam_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.HasKey("AssetId");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("AssetAssignedTo");
 
                     b.ToTable("Assets");
                 });
@@ -68,20 +65,20 @@ namespace cam_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignedAssetId"), 1L, 1);
 
-                    b.Property<int>("AssetId")
+                    b.Property<int?>("AssetId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateAssigned")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime?>("DateReturned")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("AssignedAssetId");
 
@@ -109,8 +106,7 @@ namespace cam_api.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("DOJ")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime?>("EOJ")
                         .HasColumnType("datetime2");
@@ -149,8 +145,8 @@ namespace cam_api.Migrations
             modelBuilder.Entity("cam_api.Models.Asset", b =>
                 {
                     b.HasOne("cam_api.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .WithMany("Assets")
+                        .HasForeignKey("AssetAssignedTo");
 
                     b.Navigation("Employee");
                 });
@@ -159,19 +155,20 @@ namespace cam_api.Migrations
                 {
                     b.HasOne("cam_api.Models.Asset", "Asset")
                         .WithMany()
-                        .HasForeignKey("AssetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssetId");
 
                     b.HasOne("cam_api.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Asset");
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("cam_api.Models.Employee", b =>
+                {
+                    b.Navigation("Assets");
                 });
 #pragma warning restore 612, 618
         }

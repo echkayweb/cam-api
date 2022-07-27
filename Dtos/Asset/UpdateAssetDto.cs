@@ -8,6 +8,5 @@ namespace cam_api.Dtos.Asset
         public string AssetSerialNumber { get; set; } = string.Empty;
         public bool AssetAvailable { get; set; } = true;
         public int? AssetAssignedTo { get; set; }
-        public Employee? Employee { get; set; }
     }
 }

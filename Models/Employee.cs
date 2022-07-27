@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,14 +29,16 @@ namespace cam_api.Models
         [Column(TypeName = "nvarchar(20)")]
         public string Country { get; set; } = string.Empty;
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(TypeName = "Date")]
         public DateTime DOJ { get; set; }
 
+        [Column(TypeName = "Date")]
         public DateTime? EOJ { get; set; }
 
         public long Phone { get; set; }
 
         [Column(TypeName = "nvarchar(30)")]
         public string Email { get; set; } = string.Empty;
+        public List<Asset>? Assets { get; set; }
     }
 }

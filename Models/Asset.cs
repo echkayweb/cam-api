@@ -19,6 +19,7 @@ namespace cam_api.Models
 
         public bool AssetAvailable { get; set; } = true;
 
+        [ForeignKey("Employee")]
         public int? AssetAssignedTo { get; set; }
         public Employee? Employee { get; set; }
     }
