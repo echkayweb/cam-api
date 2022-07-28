@@ -23,7 +23,7 @@ namespace cam_api.Migrations
                     Pincode = table.Column<int>(type: "int", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     DOJ = table.Column<DateTime>(type: "Date", nullable: false),
-                    EOJ = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EOJ = table.Column<DateTime>(type: "Date", nullable: true),
                     Phone = table.Column<long>(type: "bigint", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(30)", nullable: false)
                 },
@@ -41,7 +41,8 @@ namespace cam_api.Migrations
                     AssetName = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     AssetModel = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     AssetSerialNumber = table.Column<string>(type: "nvarchar(30)", nullable: false),
-                    AssetAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    AssetAvailable = table.Column<int>(type: "int", nullable: false),
+                    AssignedAssetId = table.Column<int>(type: "int", nullable: true),
                     AssetAssignedTo = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -62,7 +63,7 @@ namespace cam_api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AssetId = table.Column<int>(type: "int", nullable: true),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    Remarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Remarks = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     DateAssigned = table.Column<DateTime>(type: "Date", nullable: false),
                     DateReturned = table.Column<DateTime>(type: "Date", nullable: true)
                 },
@@ -87,6 +88,11 @@ namespace cam_api.Migrations
                 column: "AssetAssignedTo");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Assets_AssignedAssetId",
+                table: "Assets",
+                column: "AssignedAssetId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AssignedAssets_AssetId",
                 table: "AssignedAssets",
                 column: "AssetId");
@@ -95,10 +101,21 @@ namespace cam_api.Migrations
                 name: "IX_AssignedAssets_EmployeeId",
                 table: "AssignedAssets",
                 column: "EmployeeId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Assets_AssignedAssets_AssignedAssetId",
+                table: "Assets",
+                column: "AssignedAssetId",
+                principalTable: "AssignedAssets",
+                principalColumn: "AssignedAssetId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Assets_AssignedAssets_AssignedAssetId",
+                table: "Assets");
+
             migrationBuilder.DropTable(
                 name: "AssignedAssets");
 

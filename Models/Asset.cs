@@ -7,20 +7,19 @@ namespace cam_api.Models
     {
         [Key]
         public int AssetId { get; set; }
-
         [Column(TypeName = "nvarchar(100)")]
         public string AssetName { get; set; } = string.Empty;
-
         [Column(TypeName = "nvarchar(30)")]
         public string AssetModel { get; set; } = string.Empty;
-
         [Column(TypeName = "nvarchar(30)")]
         public string AssetSerialNumber { get; set; } = string.Empty;
-
-        public bool AssetAvailable { get; set; } = true;
-
-        [ForeignKey("Employee")]
+        public Availability AssetAvailable { get; set; } = Availability.Available;
+        public int? AssignedAssetId { get; set; }
         public int? AssetAssignedTo { get; set; }
+
+        [ForeignKey("AssetAssignedTo")]
         public Employee? Employee { get; set; }
+        [ForeignKey("AssignedAssetId")]
+        public AssignedAsset? AssignedAssets { get; set; }
     }
 }

@@ -33,8 +33,8 @@ namespace cam_api.Migrations
                     b.Property<int?>("AssetAssignedTo")
                         .HasColumnType("int");
 
-                    b.Property<bool>("AssetAvailable")
-                        .HasColumnType("bit");
+                    b.Property<int>("AssetAvailable")
+                        .HasColumnType("int");
 
                     b.Property<string>("AssetModel")
                         .IsRequired()
@@ -48,9 +48,14 @@ namespace cam_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int?>("AssignedAssetId")
+                        .HasColumnType("int");
+
                     b.HasKey("AssetId");
 
                     b.HasIndex("AssetAssignedTo");
+
+                    b.HasIndex("AssignedAssetId");
 
                     b.ToTable("Assets");
                 });
@@ -107,7 +112,7 @@ namespace cam_api.Migrations
                         .HasColumnType("Date");
 
                     b.Property<DateTime?>("EOJ")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -145,6 +150,12 @@ namespace cam_api.Migrations
                     b.HasOne("cam_api.Models.Employee", "Employee")
                         .WithMany("Assets")
                         .HasForeignKey("AssetAssignedTo");
+
+                    b.HasOne("cam_api.Models.AssignedAsset", "AssignedAssets")
+                        .WithMany()
+                        .HasForeignKey("AssignedAssetId");
+
+                    b.Navigation("AssignedAssets");
 
                     b.Navigation("Employee");
                 });

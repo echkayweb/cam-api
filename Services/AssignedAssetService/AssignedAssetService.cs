@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using cam_api.Data;
 using cam_api.Dtos.AssignedAsset;
@@ -40,7 +36,12 @@ namespace cam_api.Services.AssignedAssetService
         {
             var serviceResponse = new ServiceResponse<List<GetAssignedAssetDto>>();
             AssignedAsset assignedAsset = _mapper.Map<AssignedAsset>(newAssignedAsset);
+            Asset asset = await _context.Assets.FirstAsync(a => a.AssetId == assignedAsset.AssetId);
+            asset.AssetAvailable = Availability.Assigned;
+            asset.AssetAssignedTo = assignedAsset.EmployeeId;
             _context.AssignedAssets.Add(assignedAsset);
+            await _context.SaveChangesAsync();
+            asset.AssignedAssetId = assignedAsset.AssignedAssetId;
             await _context.SaveChangesAsync();
             serviceResponse.Data = await _context.AssignedAssets
                                 .Select(a => _mapper.Map<GetAssignedAssetDto>(a))
