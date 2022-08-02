@@ -19,6 +19,22 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAssignedAssetService, AssignedAssetService>();
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+    }));
+// builder.Services.AddCors(options =>
+// {
+//     options.AddDefaultPolicy(
+//                           policy =>
+//                           {
+//                               policy.WithOrigins("http://localhost:3000")
+//                                                   .AllowAnyHeader()
+//                                                   .AllowAnyMethod()
+//                                                   .SetIsOriginAllowed((origin) => true)
+//                                                   .AllowCredentials();
+//                           });
+// });
 
 var app = builder.Build();
 
@@ -29,7 +45,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("corsapp");
+
+// app.UseCors(options => options
+//     .AllowAnyMethod()
+//     .AllowAnyHeader()
+//     .SetIsOriginAllowed(origin => true)
+//     .AllowCredentials()
+// );
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
