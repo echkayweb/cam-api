@@ -10,6 +10,7 @@ namespace cam_api.Dtos.EmployeeDto
         public string State { get; set; } = string.Empty;
         public int Pincode { get; set; }
         public string Country { get; set; } = string.Empty;
+        public DateTime? DOJ { get; set; }
         public DateTime? EOJ { get; set; }
         public long Phone { get; set; }
         public string Email { get; set; } = string.Empty;
