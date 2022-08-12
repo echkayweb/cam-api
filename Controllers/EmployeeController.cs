@@ -17,7 +17,19 @@ namespace cam_api.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetEmployeeDto>>>> Get()
         {
-            return Ok(await _employeeService.GetAllEmployees());
+            var employees = await _employeeService.GetAllEmployees();
+            if (employees.Data != null)
+            {
+                foreach (var employee in employees.Data)
+                {
+                    if (employee.ImageName != "")
+                    {
+                        employee.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}",
+                        Request.Scheme, Request.Host, Request.PathBase, employee.ImageName);
+                    }
+                }
+            }
+            return Ok(employees);
         }
 
         [HttpGet("{id}")]
@@ -27,7 +39,7 @@ namespace cam_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetEmployeeDto>>>> AddEmployee(AddEmployeeDto newEmployee)
+        public async Task<ActionResult<ServiceResponse<List<GetEmployeeDto>>>> AddEmployee([FromForm] AddEmployeeDto newEmployee)
         {
             var response = await _employeeService.AddEmployee(newEmployee);
             if (response.Data == null)
@@ -37,10 +49,10 @@ namespace cam_api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ServiceResponse<GetEmployeeDto>>> UpdateEmployee(UpdateEmployeeDto updatedEmployee)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ServiceResponse<GetEmployeeDto>>> UpdateEmployee(int id, [FromForm] UpdateEmployeeDto updatedEmployee)
         {
-            var response = await _employeeService.UpdateEmployee(updatedEmployee);
+            var response = await _employeeService.UpdateEmployee(id, updatedEmployee);
             if (response.Data == null)
             {
                 return NotFound(response);

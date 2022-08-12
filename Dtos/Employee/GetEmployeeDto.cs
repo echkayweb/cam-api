@@ -14,5 +14,10 @@ namespace cam_api.Dtos.EmployeeDto
         public DateTime? EOJ { get; set; }
         public long Phone { get; set; }
         public string Email { get; set; } = string.Empty;
+        public long Mobile { get; set; }
+        public int Salary { get; set; }
+        public string ImageName { get; set; } = string.Empty;
+        public IFormFile? ImageFile { get; set; }
+        public string ImageSrc { get; set; } = string.Empty;
     }
 }

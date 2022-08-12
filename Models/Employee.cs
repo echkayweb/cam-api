@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,6 +38,19 @@ namespace cam_api.Models
 
         [Column(TypeName = "nvarchar(30)")]
         public string Email { get; set; } = string.Empty;
+
+        [Column(TypeName = "nvarchar(100)")]
+        public string ImageName { get; set; } = string.Empty;
+
+        public long Mobile { get; set; }
+
+        public int Salary { get; set; }
+
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
+
+        [NotMapped]
+        public string ImageSrc { get; set; } = string.Empty;
         public List<Asset>? Assets { get; set; }
     }
 }

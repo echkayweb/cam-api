@@ -2,7 +2,6 @@ namespace cam_api.Dtos.EmployeeDto
 {
     public class UpdateEmployeeDto
     {
-        public int EmployeeId { get; set; }
         public string EmployeeName { get; set; } = string.Empty;
         public string HouseNumber { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
@@ -14,5 +13,9 @@ namespace cam_api.Dtos.EmployeeDto
         public DateTime? EOJ { get; set; }
         public long Phone { get; set; }
         public string Email { get; set; } = string.Empty;
+        public long Mobile { get; set; }
+        public int Salary { get; set; }
+        public string ImageName { get; set; } = string.Empty;
+        public IFormFile? ImageFile { get; set; }
     }
 }

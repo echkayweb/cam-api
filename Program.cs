@@ -4,6 +4,7 @@ using cam_api.Services.AssetService;
 using cam_api.Services.AssignedAssetService;
 using cam_api.Services.EmployeeService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +55,12 @@ app.UseCors("corsapp");
 //     .AllowCredentials()
 // );
 // app.UseHttpsRedirection();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Images")),
+    RequestPath = "/Images"
+});
 
 app.UseAuthorization();
 
