@@ -12,8 +12,8 @@ using cam_api.Data;
 namespace cam_api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220811175412_EmpImg")]
-    partial class EmpImg
+    [Migration("20220812142657_EmpImgMoreValid")]
+    partial class EmpImgMoreValid
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

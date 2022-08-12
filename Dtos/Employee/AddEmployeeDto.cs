@@ -13,11 +13,11 @@ namespace cam_api.Dtos.EmployeeDto
         public string Country { get; set; } = string.Empty;
         public DateTime DOJ { get; set; }
         [Phone]
-        public long Phone { get; set; }
+        public string Phone { get; set; } = string.Empty;
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
         [Phone]
-        public long Mobile { get; set; }
+        public string Mobile { get; set; } = string.Empty;
         public int Salary { get; set; }
         public string? ImageName { get; set; }
         public IFormFile? ImageFile { get; set; }
@@ -26,6 +26,8 @@ namespace cam_api.Dtos.EmployeeDto
         {
             if (DOJ.Year < 2000)
                 yield return new ValidationResult("Joining data is incorrect.");
+            if (DOJ.Date > DateTime.Now.Date)
+                yield return new ValidationResult("Invalid Date");
         }
     }
 }

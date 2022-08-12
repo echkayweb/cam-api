@@ -4,7 +4,7 @@
 
 namespace cam_api.Migrations
 {
-    public partial class EmpImg : Migration
+    public partial class EmpImgMoreValid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
