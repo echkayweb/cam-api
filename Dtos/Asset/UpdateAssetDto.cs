@@ -2,9 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace cam_api.Dtos.AssetDto
 {
-    public class UpdateAssetDto: IValidatableObject
+    public class UpdateAssetDto : IValidatableObject
     {
-        public int AssetId { get; set; }
         public string AssetName { get; set; } = string.Empty;
         public string AssetModel { get; set; } = string.Empty;
         public string AssetSerialNumber { get; set; } = string.Empty;

@@ -49,7 +49,7 @@ namespace cam_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetAssetDto>>>> AddAsset(AddAssetDto newAsset)
+        public async Task<ActionResult<ServiceResponse<List<GetAssetDto>>>> AddAsset([FromForm] AddAssetDto newAsset)
         {
             var response = await _assetService.AddAsset(newAsset);
             if (response.Data == null)
@@ -60,7 +60,7 @@ namespace cam_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetAssetDto>>> UpdateAsset(int id, UpdateAssetDto updatedAsset)
+        public async Task<ActionResult<ServiceResponse<GetAssetDto>>> UpdateAsset(int id, [FromForm] UpdateAssetDto updatedAsset)
         {
             var response = await _assetService.UpdateAsset(id, updatedAsset);
             if (response.Data == null)
