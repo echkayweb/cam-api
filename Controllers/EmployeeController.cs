@@ -24,7 +24,7 @@ namespace cam_api.Controllers
                 {
                     if (employee.ImageName != "")
                     {
-                        employee.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}",
+                        employee.ImageSrc = String.Format("{0}://{1}{2}/Images/Employees/{3}",
                         Request.Scheme, Request.Host, Request.PathBase, employee.ImageName);
                     }
                 }
@@ -35,7 +35,16 @@ namespace cam_api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetEmployeeDto>>> GetSingle(int id)
         {
-            return Ok(await _employeeService.GetEmployeeById(id));
+            var employee = await _employeeService.GetEmployeeById(id);
+            if (employee.Data != null)
+            {
+                if (employee.Data.ImageName != "")
+                {
+                    employee.Data.ImageSrc = String.Format("{0}://{1}{2}/Images/Employees/{3}",
+                        Request.Scheme, Request.Host, Request.PathBase, employee.Data.ImageName);
+                }
+            }
+            return Ok(employee);
         }
 
         [HttpPost]

@@ -18,13 +18,34 @@ namespace cam_api.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetAssetDto>>>> Get()
         {
-            return Ok(await _assetService.GetAllAssets());
+            var assets = await _assetService.GetAllAssets();
+            if (assets.Data != null)
+            {
+                foreach (var asset in assets.Data)
+                {
+                    if (asset.ImageName != "")
+                    {
+                        asset.ImageSrc = String.Format("{0}://{1}{2}/Images/Assets/{3}",
+                        Request.Scheme, Request.Host, Request.PathBase, asset.ImageName);
+                    }
+                }
+            }
+            return Ok(assets);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetAssetDto>>> GetSingle(int id)
         {
-            return Ok(await _assetService.GetAssetById(id));
+            var asset = await _assetService.GetAssetById(id);
+            if (asset.Data != null)
+            {
+                if (asset.Data.ImageName != "")
+                {
+                    asset.Data.ImageSrc = String.Format("{0}://{1}{2}/Images/Assets/{3}",
+                    Request.Scheme, Request.Host, Request.PathBase, asset.Data.ImageName);
+                }
+            }
+            return Ok(asset);
         }
 
         [HttpPost]
@@ -38,10 +59,10 @@ namespace cam_api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ServiceResponse<GetAssetDto>>> UpdateAsset(UpdateAssetDto updatedAsset)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ServiceResponse<GetAssetDto>>> UpdateAsset(int id, UpdateAssetDto updatedAsset)
         {
-            var response = await _assetService.UpdateAsset(updatedAsset);
+            var response = await _assetService.UpdateAsset(id, updatedAsset);
             if (response.Data == null)
             {
                 return NotFound(response);

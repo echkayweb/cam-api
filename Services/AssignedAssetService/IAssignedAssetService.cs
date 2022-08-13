@@ -7,7 +7,7 @@ namespace cam_api.Services.AssignedAssetService
         Task<ServiceResponse<List<GetAssignedAssetDto>>> GetAllAssignedAssets();
         Task<ServiceResponse<GetAssignedAssetDto>> GetAssignedAssetById(int id);
         Task<ServiceResponse<List<GetAssignedAssetDto>>> AddAssignedAsset(AddAssignedAssetDto newAssignAsset);
-        Task<ServiceResponse<GetAssignedAssetDto>> UpdateAssignedAsset(UpdateAssignedAssetDto updatedAssignAsset);
+        Task<ServiceResponse<GetAssignedAssetDto>> UpdateAssignedAsset(int id, UpdateAssignedAssetDto updatedAssignAsset);
         Task<ServiceResponse<List<GetAssignedAssetDto>>> DeleteAssignedAsset(int id);
     }
 }

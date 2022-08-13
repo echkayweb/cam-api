@@ -7,7 +7,7 @@ namespace cam_api.Services.AssetService
         Task<ServiceResponse<List<GetAssetDto>>> GetAllAssets();
         Task<ServiceResponse<GetAssetDto>> GetAssetById(int id);
         Task<ServiceResponse<List<GetAssetDto>>> AddAsset(AddAssetDto newAsset);
-        Task<ServiceResponse<GetAssetDto>> UpdateAsset(UpdateAssetDto updatedAsset);
+        Task<ServiceResponse<GetAssetDto>> UpdateAsset(int id, UpdateAssetDto updatedAsset);
         Task<ServiceResponse<List<GetAssetDto>>> DeleteAsset(int id);
     }
 }

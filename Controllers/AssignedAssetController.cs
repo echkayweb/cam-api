@@ -38,10 +38,10 @@ namespace cam_api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ServiceResponse<GetAssignedAssetDto>>> UpdateAssignedAsset(UpdateAssignedAssetDto updatedAssignedAsset)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ServiceResponse<GetAssignedAssetDto>>> UpdateAssignedAsset(int id, UpdateAssignedAssetDto updatedAssignedAsset)
         {
-            var response = await _assignedAssetService.UpdateAssignedAsset(updatedAssignedAsset);
+            var response = await _assignedAssetService.UpdateAssignedAsset(id, updatedAssignedAsset);
             if (response.Data == null)
             {
                 return NotFound(response);

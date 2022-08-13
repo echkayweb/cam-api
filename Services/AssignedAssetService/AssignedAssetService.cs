@@ -49,13 +49,13 @@ namespace cam_api.Services.AssignedAssetService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetAssignedAssetDto>> UpdateAssignedAsset(UpdateAssignedAssetDto updatedAssignedAsset)
+        public async Task<ServiceResponse<GetAssignedAssetDto>> UpdateAssignedAsset(int id, UpdateAssignedAssetDto updatedAssignedAsset)
         {
             ServiceResponse<GetAssignedAssetDto> response = new ServiceResponse<GetAssignedAssetDto>();
             try
             {
                 var assignedAsset = await _context.AssignedAssets.
-                            FirstOrDefaultAsync(a => a.AssignedAssetId == updatedAssignedAsset.AssignedAssetId);
+                            FirstOrDefaultAsync(a => a.AssignedAssetId == id);
 
                 _mapper.Map(updatedAssignedAsset, assignedAsset);
 

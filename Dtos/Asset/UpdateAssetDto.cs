@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace cam_api.Dtos.AssetDto
 {
-    public class UpdateAssetDto
+    public class UpdateAssetDto: IValidatableObject
     {
         public int AssetId { get; set; }
         public string AssetName { get; set; } = string.Empty;
@@ -9,5 +11,16 @@ namespace cam_api.Dtos.AssetDto
         public Availability AssetAvailable { get; set; } = Availability.Available;
         public int? AssignedAssetId { get; set; }
         public int? AssetAssignedTo { get; set; }
+        public string Warranty { get; set; } = string.Empty;
+        public DateTime PurchaseDate { get; set; }
+        public string ImageName { get; set; } = string.Empty;
+        public IFormFile? ImageFile { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (PurchaseDate.Year < 2000)
+                yield return new ValidationResult("Purchase data is incorrect.");
+            if (PurchaseDate.Date > DateTime.Now.Date)
+                yield return new ValidationResult("Invalid Date");
+        }
     }
 }

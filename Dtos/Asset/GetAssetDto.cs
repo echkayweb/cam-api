@@ -9,5 +9,10 @@ namespace cam_api.Dtos.AssetDto
         public Availability AssetAvailable { get; set; } = Availability.Available;
         public int? AssignedAssetId { get; set; }
         public int? AssetAssignedTo { get; set; }
+        public string Warranty { get; set; } = string.Empty;
+        public DateTime PurchaseDate { get; set; }
+        public string ImageName { get; set; } = string.Empty;
+        public IFormFile? ImageFile { get; set; }
+        public string ImageSrc { get; set; } = string.Empty;
     }
 }

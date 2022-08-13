@@ -58,8 +58,14 @@ app.UseCors("corsapp");
 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Images")),
-    RequestPath = "/Images"
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Images/Employees")),
+    RequestPath = "/Images/Employees"
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Images/Assets")),
+    RequestPath = "/Images/Assets"
 });
 
 app.UseAuthorization();
