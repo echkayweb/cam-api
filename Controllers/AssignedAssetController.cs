@@ -1,9 +1,11 @@
 using cam_api.Dtos.AssignedAsset;
 using cam_api.Services.AssignedAssetService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cam_api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AssignedAssetController : ControllerBase

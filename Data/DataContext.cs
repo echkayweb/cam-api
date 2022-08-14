@@ -11,14 +11,13 @@ namespace cam_api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<AssignedAsset>()
-            // .HasOne(p => p.Asset)
-            // .WithMany(b => b.AssignedAsset);
+
         }
 
         public DbSet<Asset> Assets => Set<Asset>();
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<AssignedAsset> AssignedAssets => Set<AssignedAsset>();
+        public DbSet<User> Users => Set<User>();
 
     }
 }
